@@ -31,9 +31,9 @@ class Timer
         return $this->id;
     }
 
-    public function getTime(): ?\DateTimeInterface
+    public function getTime(): ?string
     {
-        return $this->time;
+        return $this->time->format('H:i:s');
     }
 
     public function setTime(\DateTimeInterface $time): self
