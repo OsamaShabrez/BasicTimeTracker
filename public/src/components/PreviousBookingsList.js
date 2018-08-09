@@ -1,4 +1,4 @@
-import _ from 'Lodash';
+import {filter, slice, toLower} from 'Lodash';
 import React from 'react';
 import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { render } from 'react-dom';
@@ -34,8 +34,8 @@ export default class PreviousBookingsList extends React.Component {
     const { previousBookings } = this.props;
     const { searchString, currentPageIndex, maxItemsPerPage } = this.state;
 
-    const filteredPreviousBookings = _.filter(previousBookings, function(bookingItem) {
-      return _.toLower(bookingItem.description).includes(_.toLower(searchString));
+    const filteredPreviousBookings = filter(previousBookings, function(bookingItem) {
+      return toLower(bookingItem.description).includes(toLower(searchString));
     });
 
     const currentPageLastIndex = currentPageIndex * maxItemsPerPage;
@@ -46,7 +46,7 @@ export default class PreviousBookingsList extends React.Component {
     const rightPaginationButton = currentPageIndex <= totalPages ? true : false;
     const offset = leftPaginationButton ? false : true;
 
-    const currentIndexPreviousBookings = _.slice(filteredPreviousBookings, currentPageFirstIndex, currentPageLastIndex);
+    const currentIndexPreviousBookings = slice(filteredPreviousBookings, currentPageFirstIndex, currentPageLastIndex);
 
     return (
       <div className="row">

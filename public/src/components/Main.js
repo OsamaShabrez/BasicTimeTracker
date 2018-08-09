@@ -1,7 +1,6 @@
-import _ from 'Lodash';
+import { concat } from 'Lodash';
 import axios from 'axios';
 import React from 'react';
-import update from 'immutability-helper';
 import { render } from 'react-dom';
 import $ from 'jquery';
 
@@ -20,10 +19,9 @@ export default class Main extends React.Component {
     // fetch all previous bookings
     axios.get('/fetch-all')
       .then((response) => {
-        const newState = update(this.state, {
-          previousBookings: { $set: response.data }
+        this.setState({
+          previousBookings: response.data
         });
-        this.setState(newState);
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +56,7 @@ export default class Main extends React.Component {
       })
       .then((response) => {
         this.setState({
-          previousBookings: _.concat(timerObj, this.state.previousBookings)
+          previousBookings: concat(timerObj, this.state.previousBookings)
         });
       })
       .catch((error) => {
